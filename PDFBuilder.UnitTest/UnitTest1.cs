@@ -11,7 +11,8 @@ namespace PDFBuilder.UnitTest
         {
             var xml = System.IO.File.ReadAllText(System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "2.xml"));
             var b = new XmlPDFBuilder();
-            b.Builder(System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "1.pdf"), new NoRenderer(xml));
+            b.Builder(System.IO.Path.Combine(@"C:\Users\rick\Desktop", "1.pdf"), new RazorTemplateRenderer(xml, new { Content = "hello world aaa" }));
+            Assert.IsNotNull("");
         }
     }
 }

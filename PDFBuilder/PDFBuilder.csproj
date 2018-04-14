@@ -38,6 +38,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
     </Reference>
@@ -49,14 +50,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Body.cs" />
+    <Compile Include="BasePDFBuilder.cs" />
+    <Compile Include="Models\PDFBody.cs" />
+    <Compile Include="Models\PDFContext.cs" />
+    <Compile Include="PDFPainter\IPDFPainter.cs" />
+    <Compile Include="PDFPainter\ITextSharpPDFPainter.cs" />
     <Compile Include="XmlPDFBuilder.cs" />
     <Compile Include="IPDFBuilder.cs" />
     <Compile Include="IPDFBuilderAsync.cs" />
     <Compile Include="IRenderer.cs" />
-    <Compile Include="Models\Document.cs" />
-    <Compile Include="Models\Element.cs" />
-    <Compile Include="Models\Paragraph.cs" />
+    <Compile Include="Models\PDFDocument.cs" />
+    <Compile Include="Models\PDFElement.cs" />
+    <Compile Include="Models\PDFParagraph.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TemplateRenderers\NoRenderer.cs" />
     <Compile Include="TemplateRenderers\RazorTemplateRenderer.cs" />

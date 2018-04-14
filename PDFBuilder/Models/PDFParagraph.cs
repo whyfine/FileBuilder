@@ -8,13 +8,13 @@ using System.Xml.Serialization;
 namespace PDFBuilder.Models
 {
     [Serializable]
-    internal class Paragraph : Element
+    public class PDFParagraph : PDFElement
     {
         [XmlAttribute("txt")]
-        internal string Txt { get; set; }
+        public string Txt { get; set; }
         [XmlText]
-        internal string Content { get; set; }
-        internal override Element Child { get; set; }
-        internal override List<Element> Childs { get; set; }
+        public string Content { get; set; }
+        public override PDFElement Child { get; set; }
+        public override List<PDFElement> Childs { get; set; }
     }
 }

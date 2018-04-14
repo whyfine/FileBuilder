@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<pdf title="hello">
+<pdf title="hello" pageSize="A4" margin="0">
   <body>
-    <p txt="Label2">Hello World</p>
+    <p txt="Label2">@Model.Content</p>
   </body>
 </pdf>

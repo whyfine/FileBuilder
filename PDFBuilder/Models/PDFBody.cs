@@ -8,9 +8,9 @@ using System.Xml.Serialization;
 namespace PDFBuilder.Models
 {
     [Serializable]
-    internal class Body
+    public class PDFBody
     {
-        [XmlElement(typeof(Paragraph), ElementName = "p")]
-        internal List<Element> Elements { get; set; }
+        [XmlElement(typeof(PDFParagraph), ElementName = "p")]
+        public List<PDFElement> Elements { get; set; }
     }
 }

@@ -1,10 +1,12 @@
-﻿using RazorEngine;
+﻿using PDFBuilder.Models;
+using RazorEngine;
 using RazorEngine.Templating;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace PDFBuilder
 {
@@ -17,10 +19,12 @@ namespace PDFBuilder
             this._template = template;
             this._data = data;
         }
-        public string Render()
+        public PDFDocument Render()
         {
-            return
+            var xml =
     Engine.Razor.RunCompile(this._template, "", null, this._data);
+            var xmlSerializer = new XmlSerializer(typeof(PDFBuilder.Models.PDFDocument));
+            return xmlSerializer.Deserializer<PDFBuilder.Models.PDFDocument>(xml);
         }
     }
 }

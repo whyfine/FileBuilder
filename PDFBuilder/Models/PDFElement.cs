@@ -8,10 +8,10 @@ using System.Xml.Serialization;
 namespace PDFBuilder.Models
 {
     [Serializable]
-    internal abstract class Element
+    public abstract class PDFElement
     {
 
-        internal abstract Element Child { get; set; }
-        internal abstract List<Element> Childs { get; set; }
+        public abstract PDFElement Child { get; set; }
+        public abstract List<PDFElement> Childs { get; set; }
     }
 }
