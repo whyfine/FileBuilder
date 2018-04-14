@@ -10,7 +10,7 @@ namespace FileBuilder
     {
         protected override IFilePainter GetFilePainter()
         {
-            return new ITextSharpPDFPainter();
+            return new iTextSharpPDFPainter();
         }
     }
 }

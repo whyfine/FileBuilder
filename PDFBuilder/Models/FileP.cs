@@ -12,6 +12,10 @@ namespace FileBuilder.Models
     {
         [XmlText]
         public string Content { get; set; }
+        [XmlAttribute("fontName")]
+        public string FontName { get; set; }
+        [XmlAttribute("fontSize")]
+        public string FontSize { get; set; }
         public List<FileElement> Childs { get; set; }
     }
 }

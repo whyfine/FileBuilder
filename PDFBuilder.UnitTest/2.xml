@@ -1,8 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <pdf title="hello" pageSize="A4" margin="0">
   <body>
-    <p>
+    <p fontSize="12" fontName="黑体">
       @Model.Content
     </p>
+    <table>
+      <tr>
+        <td></td>
+      </tr>
+    </table>
   </body>
 </pdf>

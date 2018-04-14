@@ -57,7 +57,7 @@
     <Compile Include="Models\FileFont.cs" />
     <Compile Include="Models\FileSpan.cs" />
     <Compile Include="FilePainter\IFilePainter.cs" />
-    <Compile Include="FilePainter\ITextSharpPDFPainter.cs" />
+    <Compile Include="FilePainter\iTextSharpPDFPainter.cs" />
     <Compile Include="FileBuilder\XmlPDFBuilder.cs" />
     <Compile Include="FileBuilder\IFileBuilder.cs" />
     <Compile Include="FileBuilder\IPDFBuilder.cs" />

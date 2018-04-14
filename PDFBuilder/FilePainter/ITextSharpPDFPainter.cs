@@ -10,7 +10,7 @@ using FileBuilder.Models;
 
 namespace FileBuilder
 {
-    internal class ITextSharpPDFPainter : IPDFPainter
+    internal class iTextSharpPDFPainter : IPDFPainter
     {
         protected Document _itextDocument;
         public void Drawing(FileContext context)
@@ -22,15 +22,37 @@ namespace FileBuilder
         }
         protected void DrawingBody(FileContext context)
         {
-            foreach (var element in context.Document.Body.Elements)
+            RecursiveDrawingElement(context.Document.Body.Elements, null);
+        }
+        private void RecursiveDrawingElement(List<FileElement> elements, IElement parent)
+        {
+            foreach (var element in elements)
             {
                 if (element is FileP)
                 {
                     var p = element as FileP;
                     if (!string.IsNullOrEmpty(p.Content))
                     {
-                        this._itextDocument.Add(new Paragraph(p.Content));
+                        this._itextDocument.Add(new Paragraph(p.Content, this.GetFont(p.FontName, p.FontSize)));
                     }
+                    else if (p.Childs.Count > 0)
+                    {
+                        var allowChildTypes = new List<Type>() { typeof(FileSpan), typeof(FileFont) };
+                        var allowCount = p.Childs.Count(v => !allowChildTypes.Contains(v.GetType()));
+                        if (allowCount > 0)
+                            throw new ArgumentException("child not allow");
+                        var paragraph = new Paragraph();
+                        RecursiveDrawingElement(p.Childs, paragraph);
+                    }
+                }
+                else if (element is FileFont)
+                {
+                    var font = element as FileFont;
+                    if (!string.IsNullOrEmpty(font.Content))
+                    {
+
+                    }
+                   
                 }
             }
         }
@@ -95,6 +117,30 @@ namespace FileBuilder
             if (!float.TryParse(marginStr, out t))
                 throw new FormatException("document.margin");
             return new float[] { t, t, t, t };
+        }
+        private Font GetFont(string fontName, string fontSize)
+        {
+            string fontPath;
+            switch (fontName)
+            {
+                case "新宋体":
+                    fontPath = @"C:\Windows\Fonts\simsun.ttc,1";
+                    break;
+                case "楷体":
+                    fontPath = @"C:\Windows\Fonts\simkai.ttf";
+                    break;
+                case "黑体":
+                    fontPath = @"C:\Windows\Fonts\simhei.ttf";
+                    break;
+                case "仿宋体":
+                    fontPath = @"C:\Windows\Fonts\simfang.ttc";
+                    break;
+                default:
+                    fontPath = @"C:\Windows\Fonts\simsun.ttc,0"; //宋体
+                    break;
+            }
+            float size = float.TryParse(fontSize, out size) ? size : 20;
+            return new Font(BaseFont.CreateFont(fontPath, BaseFont.IDENTITY_H, BaseFont.EMBEDDED), size);
         }
     }
 }
