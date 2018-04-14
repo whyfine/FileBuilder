@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using PDFBuilder.Models;
 
-namespace PDFBuilder
+namespace FileBuilder
 {
-    public interface IRenderer
+    public interface IPDFPainter : IFilePainter
     {
-        PDFDocument Render();
     }
 }

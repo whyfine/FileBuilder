@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace PDFBuilder.UnitTest
+namespace FileBuilder.UnitTest
 {
     [TestClass]
     public class UnitTest1
@@ -10,7 +10,7 @@ namespace PDFBuilder.UnitTest
         public void TestMethod1()
         {
             var xml = System.IO.File.ReadAllText(System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "2.xml"));
-            var b = new XmlPDFBuilder();
+            var b = new XmlFileBuilder();
             b.Builder(System.IO.Path.Combine(@"C:\Users\rick\Desktop", "1.pdf"), new RazorTemplateRenderer(xml, new { Content = "hello world aaa" }));
             Assert.IsNotNull("");
         }

@@ -5,12 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace PDFBuilder.Models
+namespace FileBuilder.Models
 {
     [Serializable]
-    public class PDFBody
+    public class FileFont : FileElement
     {
-        [XmlElement(typeof(PDFParagraph), ElementName = "p")]
-        public List<PDFElement> Elements { get; set; }
+
+        [XmlText]
+        public string Content { get; set; }
     }
 }

@@ -7,8 +7,8 @@
     <ProjectGuid>{E546C49C-C800-4558-B83E-6C761BCAA084}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PDFBuilder</RootNamespace>
-    <AssemblyName>PDFBuilder</AssemblyName>
+    <RootNamespace>FileBuilder</RootNamespace>
+    <AssemblyName>FileBuilder</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -50,18 +50,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BasePDFBuilder.cs" />
-    <Compile Include="Models\PDFBody.cs" />
-    <Compile Include="Models\PDFContext.cs" />
-    <Compile Include="PDFPainter\IPDFPainter.cs" />
-    <Compile Include="PDFPainter\ITextSharpPDFPainter.cs" />
-    <Compile Include="XmlPDFBuilder.cs" />
-    <Compile Include="IPDFBuilder.cs" />
-    <Compile Include="IPDFBuilderAsync.cs" />
-    <Compile Include="IRenderer.cs" />
-    <Compile Include="Models\PDFDocument.cs" />
-    <Compile Include="Models\PDFElement.cs" />
-    <Compile Include="Models\PDFParagraph.cs" />
+    <Compile Include="FileBuilder\BaseFileBuilder.cs" />
+    <Compile Include="FilePainter\IPDFPainter.cs" />
+    <Compile Include="Models\FileBody.cs" />
+    <Compile Include="Models\FileContext.cs" />
+    <Compile Include="Models\FileFont.cs" />
+    <Compile Include="Models\FileSpan.cs" />
+    <Compile Include="FilePainter\IFilePainter.cs" />
+    <Compile Include="FilePainter\ITextSharpPDFPainter.cs" />
+    <Compile Include="FileBuilder\XmlPDFBuilder.cs" />
+    <Compile Include="FileBuilder\IFileBuilder.cs" />
+    <Compile Include="FileBuilder\IPDFBuilder.cs" />
+    <Compile Include="TemplateRenderers\IRenderer.cs" />
+    <Compile Include="Models\FileDocument.cs" />
+    <Compile Include="Models\FileElement.cs" />
+    <Compile Include="Models\FileP.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TemplateRenderers\NoRenderer.cs" />
     <Compile Include="TemplateRenderers\RazorTemplateRenderer.cs" />

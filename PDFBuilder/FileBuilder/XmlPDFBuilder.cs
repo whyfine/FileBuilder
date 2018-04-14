@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PDFBuilder
+namespace FileBuilder
 {
-    public class XmlPDFBuilder : BasePDFBuilder, IPDFBuilderAsync
+    public class XmlFileBuilder : BaseFileBuilder, IPDFBuilder
     {
-        protected override IPDFPainter GetPDFPainter()
+        protected override IFilePainter GetFilePainter()
         {
             return new ITextSharpPDFPainter();
         }

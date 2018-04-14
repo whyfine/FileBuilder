@@ -7,8 +7,8 @@
     <ProjectGuid>{876A85BE-0C9C-44D1-B30C-C93B875153E7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PDFBuilder.UnitTest</RootNamespace>
-    <AssemblyName>PDFBuilder.UnitTest</AssemblyName>
+    <RootNamespace>FileBuilder.UnitTest</RootNamespace>
+    <AssemblyName>FileBuilder.UnitTest</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -60,9 +60,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PDFBuilder\PDFBuilder.csproj">
+    <ProjectReference Include="..\PDFBuilder\FileBuilder.csproj">
       <Project>{e546c49c-c800-4558-b83e-6c761bcaa084}</Project>
-      <Name>PDFBuilder</Name>
+      <Name>FileBuilder</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

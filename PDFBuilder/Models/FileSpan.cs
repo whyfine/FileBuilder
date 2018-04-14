@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace PDFBuilder.Models
+namespace FileBuilder.Models
 {
     [Serializable]
-    public abstract class PDFElement
+    public class FileSpan: FileElement
     {
 
-        public abstract PDFElement Child { get; set; }
-        public abstract List<PDFElement> Childs { get; set; }
+        [XmlText]
+        public string Content { get; set; }
     }
 }

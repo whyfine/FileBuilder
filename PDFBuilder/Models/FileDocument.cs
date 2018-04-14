@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace PDFBuilder.Models
+namespace FileBuilder.Models
 {
     [Serializable]
     [XmlRoot("pdf")]
-    public class PDFDocument
+    public class FileDocument
     {
         [XmlAttribute("pageSize")]
         public string PageSize { get; set; }
@@ -34,7 +34,7 @@ namespace PDFBuilder.Models
         public string CreationDate { get; set; }
         //public object Header { get; set; }
         [XmlElement(ElementName = "body")]
-        public PDFBody Body { get; set; }
+        public FileBody Body { get; set; }
         //public object Footer { get; set; }
     }
 }

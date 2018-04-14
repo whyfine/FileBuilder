@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PDFBuilder
+namespace FileBuilder
 {
-    public abstract class BasePDFBuilder : IPDFBuilderAsync
+    public abstract class BaseFileBuilder : IFileBuilder
     {
         public byte[] Builder(IRenderer renderer)
         {
@@ -16,10 +16,10 @@ namespace PDFBuilder
 
         public void Builder(string savePath, IRenderer renderer)
         {
-            var pdfDocument = renderer.Render();
-            var pdfPainter = this.GetPDFPainter();
-            pdfPainter.InitDocument(pdfDocument);
-            pdfPainter.DrawingBody(pdfDocument.Body);
+            var context = renderer.Render();
+            var filePainter = this.GetFilePainter();
+            filePainter.Drawing(context);
+            File.WriteAllBytes(savePath, context.File.GetBuffer());
         }
 
         public Task<byte[]> BuilderAsync(IRenderer renderer)
@@ -32,6 +32,6 @@ namespace PDFBuilder
             throw new NotImplementedException();
         }
 
-        protected abstract IPDFPainter GetPDFPainter();
+        protected abstract IFilePainter GetFilePainter();
     }
 }

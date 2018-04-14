@@ -1,10 +1,12 @@
-﻿using System;
+﻿using FileBuilder.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
-namespace PDFBuilder
+namespace FileBuilder
 {
     public class NoRenderer : IRenderer
     {
@@ -13,9 +15,12 @@ namespace PDFBuilder
         {
             this._content = content;
         }
-        public string Render()
+        public FileContext Render()
         {
-            return this._content;
+            var context = new FileContext();
+            var xmlSerializer = new XmlSerializer(typeof(FileDocument));
+            context.Document = xmlSerializer.Deserializer<FileDocument>(this._content);
+            return context;
         }
     }
 }

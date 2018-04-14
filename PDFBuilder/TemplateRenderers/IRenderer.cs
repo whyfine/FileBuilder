@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FileBuilder.Models;
 
-namespace PDFBuilder.Models
+namespace FileBuilder
 {
-    internal class PDFContext
+    public interface IRenderer
     {
-        public PDFDocument Document { get; set; }
+        FileContext Render();
     }
 }

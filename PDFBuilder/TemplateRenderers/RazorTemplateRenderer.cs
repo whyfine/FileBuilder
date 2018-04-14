@@ -1,4 +1,4 @@
-﻿using PDFBuilder.Models;
+﻿using FileBuilder.Models;
 using RazorEngine;
 using RazorEngine.Templating;
 using System;
@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace PDFBuilder
+namespace FileBuilder
 {
     public class RazorTemplateRenderer : IRenderer
     {
@@ -19,12 +19,14 @@ namespace PDFBuilder
             this._template = template;
             this._data = data;
         }
-        public PDFDocument Render()
+        public FileContext Render()
         {
+            var context = new FileContext();
             var xml =
     Engine.Razor.RunCompile(this._template, "", null, this._data);
-            var xmlSerializer = new XmlSerializer(typeof(PDFBuilder.Models.PDFDocument));
-            return xmlSerializer.Deserializer<PDFBuilder.Models.PDFDocument>(xml);
+            var xmlSerializer = new XmlSerializer(typeof(FileBuilder.Models.FileDocument));
+            context.Document= xmlSerializer.Deserializer<FileDocument>(xml);
+            return context;
         }
     }
 }
