@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pdf title="hello">
+  <body>
+    <p txt="Label2">Hello World</p>
+  </body>
+</pdf>
