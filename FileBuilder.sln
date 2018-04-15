@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileBuilder", "PDFBuilder\FileBuilder.csproj", "{E546C49C-C800-4558-B83E-6C761BCAA084}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileBuilder", "FileBuilder\FileBuilder.csproj", "{E546C49C-C800-4558-B83E-6C761BCAA084}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileBuilder.UnitTest", "PDFBuilder.UnitTest\FileBuilder.UnitTest.csproj", "{876A85BE-0C9C-44D1-B30C-C93B875153E7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileBuilder.UnitTest", "FileBuilder.UnitTest\FileBuilder.UnitTest.csproj", "{876A85BE-0C9C-44D1-B30C-C93B875153E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

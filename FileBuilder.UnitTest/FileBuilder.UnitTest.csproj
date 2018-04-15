@@ -60,7 +60,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PDFBuilder\FileBuilder.csproj">
+    <ProjectReference Include="..\FileBuilder\FileBuilder.csproj">
       <Project>{e546c49c-c800-4558-b83e-6c761bcaa084}</Project>
       <Name>FileBuilder</Name>
     </ProjectReference>
