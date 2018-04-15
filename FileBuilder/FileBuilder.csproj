@@ -54,13 +54,17 @@
     <Compile Include="FilePainter\IPDFPainter.cs" />
     <Compile Include="Models\FileBody.cs" />
     <Compile Include="Models\FileContext.cs" />
+    <Compile Include="Models\FileDiv.cs" />
     <Compile Include="Models\FileFont.cs" />
+    <Compile Include="Models\FileList.cs" />
+    <Compile Include="Models\FileSection.cs" />
     <Compile Include="Models\FileSpan.cs" />
     <Compile Include="FilePainter\IFilePainter.cs" />
     <Compile Include="FilePainter\iTextSharpPDFPainter.cs" />
     <Compile Include="FileBuilder\XmlPDFBuilder.cs" />
     <Compile Include="FileBuilder\IFileBuilder.cs" />
     <Compile Include="FileBuilder\IPDFBuilder.cs" />
+    <Compile Include="Models\FileTable.cs" />
     <Compile Include="TemplateRenderers\IRenderer.cs" />
     <Compile Include="Models\FileDocument.cs" />
     <Compile Include="Models\FileElement.cs" />

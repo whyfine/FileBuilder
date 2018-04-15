@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pdf title="hello" pageSize="A4" margin="10">
+  <body>
+    <table>
+      <tr>
+        <td></td>
+      </tr>
+    </table>
+  </body>
+</pdf>

@@ -10,6 +10,7 @@ namespace FileBuilder.Models
     [Serializable]
     public class FileBody
     {
+        [XmlElement(typeof(FileTable), ElementName = "table")]
         [XmlElement(typeof(FileP), ElementName = "p")]
         [XmlElement(typeof(FileSpan), ElementName = "span")]
         [XmlElement(typeof(FileFont), ElementName = "font")]

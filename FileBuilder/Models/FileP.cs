@@ -12,10 +12,26 @@ namespace FileBuilder.Models
     {
         [XmlText]
         public string Content { get; set; }
+        [XmlAttribute("color")]
+        public string Color { get; set; }
+        [XmlAttribute("height")]
+        public string Height { get; set; }
         [XmlAttribute("fontName")]
         public string FontName { get; set; }
+
+        [XmlAttribute("fontStyle")]
+        public string FontStyle { get; set; }
         [XmlAttribute("fontSize")]
         public string FontSize { get; set; }
-        public List<FileElement> Childs { get; set; }
+        [XmlAttribute("align")]
+        public string Align { get; set; }
+        [XmlAttribute("top")]
+        public string Top { get; set; }
+        [XmlAttribute("left")]
+        public string Left { get; set; }
+        [XmlAttribute("right")]
+        public string Right { get; set; }
+        [XmlAttribute("spacing")]
+        public string Spacing { get; set; }
     }
 }

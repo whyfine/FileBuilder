@@ -20,17 +20,17 @@ namespace FileBuilder.Models
 
         [XmlAttribute("title")]
         public string Title { get; set; }
-        [XmlAttribute]
+        [XmlAttribute("subject")]
         public string Subject { get; set; }
-        [XmlAttribute]
+        [XmlAttribute("keywords")]
         public string Keywords { get; set; }
-        [XmlAttribute]
+        [XmlAttribute("author")]
         public string Author { get; set; }
-        [XmlAttribute]
+        [XmlAttribute("creator")]
         public string Creator { get; set; }
-        [XmlAttribute]
+        [XmlAttribute("producer")]
         public string Producer { get; set; }
-        [XmlAttribute]
+        [XmlAttribute("createDate")]
         public string CreationDate { get; set; }
         //public object Header { get; set; }
         [XmlElement(ElementName = "body")]

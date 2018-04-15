@@ -9,9 +9,9 @@ namespace FileBuilder.UnitTest
         [TestMethod]
         public void TestMethod1()
         {
-            var xml = System.IO.File.ReadAllText(System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "2.xml"));
+            var xml = System.IO.File.ReadAllText(System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "1.xml"));
             var b = new XmlFileBuilder();
-            b.Builder(System.IO.Path.Combine(@"C:\Users\rick\Desktop", "1.pdf"), new RazorTemplateRenderer(xml, new { Content = "hello world 出来吧 神龙！" }));
+            b.Builder(System.IO.Path.Combine(@"C:\Users\rick\Desktop", Guid.NewGuid().ToString() + ".pdf"), new RazorTemplateRenderer(xml, new { P = "我是一个p",Span="我是一个span" }));
             Assert.IsNotNull("");
         }
     }
