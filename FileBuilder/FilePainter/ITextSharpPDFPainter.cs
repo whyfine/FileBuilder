@@ -45,9 +45,9 @@ namespace FileBuilder
         }
         private void DrawingBody(FileContext context)
         {
-            FileElementMappingToIElement(context.Document.Body.Elements, element => { this._itextDocument.Add(element); }, 0);
+            FileElementMappingToIElement(context.Document.Body.Elements, element => { this._itextDocument.Add(element); });
         }
-        private void FileElementMappingToIElement(List<FileElement> elements, Action<IElement> addElement, short level)
+        private void FileElementMappingToIElement(List<FileElement> elements, Action<IElement> addElement)
         {
             foreach (var element in elements)
             {
@@ -58,6 +58,7 @@ namespace FileBuilder
                     var table = element as FileTable;
                     if (table.Rows.Count.Equals(0))
                         continue;
+                    pdfElement = this.CreatePdfPTable(table);
                     element.Childs.Clear();
                 }
                 else if (element is FileP)
@@ -81,7 +82,7 @@ namespace FileBuilder
                 if (pdfElement != null)
                 {
                     if (element.Childs.Count > 0)
-                        FileElementMappingToIElement(element.Childs, addChildElement, level++);
+                        FileElementMappingToIElement(element.Childs, addChildElement);
                     addElement(pdfElement);
                 }
             }
@@ -90,7 +91,24 @@ namespace FileBuilder
         private PdfPTable CreatePdfPTable(FileTable table)
         {
             var frow = table.Rows.First();
-            return null;
+            var pdfPTable = new PdfPTable(table.Rows.Max(v => v.Cells.Count));
+            this.SetPropertyFloat(table.Width, (width) => { pdfPTable.TotalWidth = width; });
+            this.SetAlignment(table.Align,(align) => { pdfPTable.HorizontalAlignment = align; });
+            
+            foreach (var row in table.Rows)
+            {
+                var pdfPCells = new List<PdfPCell>();
+                foreach (var cell in row.Cells)
+                {
+                    var pdfPCell = new PdfPCell(new Phrase(cell.Content, this.GetFont(cell.FontName, cell.FontSize, cell.Color, cell.FontStyle)));
+                    if (cell.Childs.Count > 0)
+                        FileElementMappingToIElement(cell.Childs, (element) => { pdfPCell.AddElement(element); });
+                    pdfPCells.Add(pdfPCell);
+                }
+                var pdfPRow = new PdfPRow(pdfPCells.ToArray());
+                pdfPTable.Rows.Add(pdfPRow);
+            }
+            return pdfPTable;
         }
         private Paragraph CreateParagraph(FileP p)
         {
@@ -102,19 +120,13 @@ namespace FileBuilder
             }
             else
                 paragraph = new Paragraph(p.Content, this.GetFont(p.FontName, p.FontSize, p.Color, p.FontStyle));
-            if (!string.IsNullOrEmpty(p.Align))
-                paragraph.Alignment = this.GetAlignment(p.Align);
+            this.SetAlignment(p.Align, (align) => { paragraph.Alignment = align; });
             float f;
-            if (!string.IsNullOrEmpty(p.Top) && float.TryParse(p.Top, out f))
-                paragraph.PaddingTop = f;
-            if (!string.IsNullOrEmpty(p.Left) && float.TryParse(p.Left, out f))
-                paragraph.IndentationLeft = f;
-            if (!string.IsNullOrEmpty(p.Right) && float.TryParse(p.Right, out f))
-                paragraph.IndentationRight = f;
-            if (!string.IsNullOrEmpty(p.Height) && float.TryParse(p.Height, out f))
-                paragraph.Leading = f;
-            if (!string.IsNullOrEmpty(p.Spacing) && float.TryParse(p.Spacing, out f))
-                paragraph.MultipliedLeading = f;
+            this.SetPropertyFloat(p.Top, (top) => { paragraph.PaddingTop = top; });
+            this.SetPropertyFloat(p.Left, (left) => { paragraph.IndentationLeft = left; });
+            this.SetPropertyFloat(p.Right, (right) => { paragraph.IndentationRight = right; });
+            this.SetPropertyFloat(p.Height, (height) => { paragraph.Leading = height; });
+            this.SetPropertyFloat(p.Spacing, (spacing) => { paragraph.MultipliedLeading = spacing; });
             return paragraph;
             //else if (p.Childs.Count > 0)
             //{
@@ -136,9 +148,7 @@ namespace FileBuilder
             }
             else
                 phrase = new Phrase(span.Content, this.GetFont(span.FontName, span.FontSize, span.Color, span.FontStyle));
-            float f;
-            if (!string.IsNullOrEmpty(span.Height) && float.TryParse(span.Height, out f))
-                phrase.Leading = f;
+            this.SetPropertyFloat(span.Height, (height) => { phrase.Leading = height; });
             return phrase;
         }
         private Chunk CreateChunk(FileFont font)
@@ -154,9 +164,8 @@ namespace FileBuilder
             float f;
             if (!string.IsNullOrEmpty(font.Height) && float.TryParse(font.Height, out f))
                 chunk.setLineHeight(f);
-            var color = this.GetBaseColor(font.BackgroundColor);
-            if (color != null)
-                chunk.SetBackground(color);
+            this.SetPropertyFloat(font.Height, (height) => { chunk.setLineHeight(height); });
+            this.SetBaseColor(font.BackgroundColor,(color)=> { chunk.SetBackground(color); });
             return chunk;
         }
 
@@ -231,63 +240,76 @@ namespace FileBuilder
                         break;
                 }
             }
-            float size;
-            if (!string.IsNullOrEmpty(fontSize) && float.TryParse(fontSize, out size))
-                font.Size = size;
-            var color = this.GetBaseColor(colorStr);
-            if (color != null)
-                font.Color = color;
+            this.SetPropertyFloat(fontSize, (size) => { font.Size = size; });
+            this.SetBaseColor(colorStr,(color)=> { font.Color = color; });
             return font;
         }
-        private BaseColor GetBaseColor(string colorStr)
+        protected void SetBaseColor(string color,Action<BaseColor> setMethod)
         {
-            BaseColor color = null;
-            if (!string.IsNullOrEmpty(colorStr))
+            BaseColor c = null;
+            if (!string.IsNullOrEmpty(color))
             {
-                if (colorStr.Contains(","))
+                if (color.Contains(","))
                 {
                     float[] rgb = new float[3];
-                    var cArr = colorStr.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                    var cArr = color.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
                     if (cArr.Length == 3 && float.TryParse(cArr[0], out rgb[0]) && float.TryParse(cArr[1], out rgb[1]) && float.TryParse(cArr[2], out rgb[2]))
-                        color = new BaseColor(rgb[0], rgb[1], rgb[2]);
+                        c = new BaseColor(rgb[0], rgb[1], rgb[2]);
                 }
                 else
                 {
-                    switch (colorStr)
+                    switch (color)
                     {
                         case "black":
-                            color = BaseColor.BLACK;
+                            c = BaseColor.BLACK;
                             break;
                         case "red":
-                            color = BaseColor.RED;
+                            c = BaseColor.RED;
                             break;
                         default:
-                            color = BaseColor.BLACK;
+                            c = BaseColor.BLACK;
                             break;
                     }
                 }
             }
-            return color;
+            if (c != null && setMethod != null)
+                setMethod(c);
         }
-        protected int GetAlignment(string align)
+        protected void SetAlignment(string align, Action<int> setMethod)
         {
+            if (string.IsNullOrEmpty(align))
+                return;
+            int i;
             switch (align)
             {
                 case "center":
-                    return Rectangle.ALIGN_CENTER;
-                case "left":
-                    return Rectangle.ALIGN_LEFT;
+                    i = Rectangle.ALIGN_CENTER;
+                    break;
                 case "right":
-                    return Rectangle.ALIGN_RIGHT;
+                    i = Rectangle.ALIGN_RIGHT;
+                    break;
                 case "top":
-                    return Rectangle.ALIGN_TOP;
+                    i = Rectangle.ALIGN_TOP;
+                    break;
                 case "middle":
-                    return Rectangle.ALIGN_MIDDLE;
+                    i = Rectangle.ALIGN_MIDDLE;
+                    break;
                 case "bottom":
-                    return Rectangle.ALIGN_BOTTOM;
+                    i = Rectangle.ALIGN_BOTTOM;
+                    break;
+                case "left":
                 default:
-                    return Rectangle.ALIGN_LEFT;
+                    i = Rectangle.ALIGN_LEFT;
+                    break;
             }
+            if (setMethod != null)
+                setMethod(i);
+        }
+        protected void SetPropertyFloat(string str, Action<float> setMethod)
+        {
+            float f;
+            if (!string.IsNullOrEmpty(str) && float.TryParse(str, out f) && setMethod != null)
+                setMethod(f);
         }
     }
 }

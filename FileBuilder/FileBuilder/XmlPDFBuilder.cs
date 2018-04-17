@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FileBuilder
 {
-    public class XmlFileBuilder : BaseFileBuilder, IPDFBuilder
+    public class XmlPDFBuilder : BaseFileBuilder, IPDFBuilder
     {
         protected override IFilePainter GetFilePainter()
         {

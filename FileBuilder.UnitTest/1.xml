@@ -2,8 +2,21 @@
 <pdf title="hello" pageSize="A4" margin="10">
   <body>
     <table>
+      @foreach(var i in Model.Arr)
+      {
       <tr>
-        <td></td>
+        <td>@i</td>
+      </tr>
+      }
+      <tr>
+        <td>
+          <table>
+            <tr>
+              <td>数据的反抗螺丝钉</td>
+              <td>数据的反抗螺丝钉</td>
+            </tr>
+          </table>
+        </td>
       </tr>
     </table>
   </body>

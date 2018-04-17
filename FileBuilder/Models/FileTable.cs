@@ -12,6 +12,10 @@ namespace FileBuilder.Models
     {
         [XmlElement(ElementName = "tr")]
         public List<FileTableRow> Rows { get; set; }
+        [XmlElement("width")]
+        public string Width { get; set; }
+        [XmlElement("align")]
+        public string Align { get; set; }
     }
     [Serializable]
     public class FileTableRow
@@ -20,8 +24,21 @@ namespace FileBuilder.Models
         public List<FileTableCell> Cells { get; set; }
     }
     [Serializable]
-    public class FileTableCell
+    public class FileTableCell : FileElement
     {
 
+        [XmlText]
+        public string Content { get; set; }
+        [XmlAttribute("color")]
+        public string Color { get; set; }
+        [XmlAttribute("height")]
+        public string Height { get; set; }
+        [XmlAttribute("fontName")]
+        public string FontName { get; set; }
+
+        [XmlAttribute("fontStyle")]
+        public string FontStyle { get; set; }
+        [XmlAttribute("fontSize")]
+        public string FontSize { get; set; }
     }
 }
