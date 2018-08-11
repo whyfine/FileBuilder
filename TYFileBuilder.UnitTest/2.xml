@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<file title="hello" pageSize="A4" margin="10">
+  <body>
+    <p fontSize="12" fontName="黑体" align="center" color="">
+      <span>@Model.P</span>
+    </p>
+    <p fontSize="12" fontName="黑体" align="center" color="">
+      @Model.P
+    </p>
+    <span></span>
+    <span color="red">
+      <span>@Model.Span</span>
+      <span>@Model.Span</span>
+    </span>
+    <p>
+      <span>@Model.P</span>
+    </p>
+    <font>我是一个font</font>
+  </body>
+</file>
